@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>FAMILY IPTV Converter</title>
+
+    <!-- شعار الموقع -->
+<link rel="icon" type="image/png" href="https://k.top4top.io/p_3783xyk9b1.png">
+  
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+body{
+  background:#050816;
+  font-family:Tahoma,sans-serif;
+  color:white;
+  overflow-x:hidden;
+}
+
+/* خلفية */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+  radial-gradient(circle at top,#240000 0%,#050816 50%);
+  z-index:-1;
+}
+
+.container{
+  max-width:950px;
+  margin:auto;
+  padding:20px 20px;
+}
+
+/* اللوجو */
+.logo-box{
+  text-align:center;
+  margin-bottom:30px;
+}
+
+.logo-box img{
+  width:120px;
+  max-width:100%;
+  margin-bottom:10px;
+}
+
+.logo-title{
+  font-size:40px;
+  font-weight:bold;
+  color:#ff002f;
+  margin-bottom:10px;
+}
+
+.logo-desc{
+  color:#ccc;
+  font-size:20px;
+}
+
+/* البطاقات */
+
+.card{
+  background:rgba(15,15,25,.95);
+  border:1px solid #ff003c;
+  border-radius:25px;
+  padding:30px;
+  margin-bottom:30px;
+  box-shadow:
+  0 0 30px rgba(255,0,60,.15);
+}
+
+.card h2{
+  color:#ff003c;
+  margin-bottom:15px;
+  font-size:30px;
+}
+
+.card p{
+  color:#aaa;
+  margin-bottom:20px;
+  line-height:1.8;
+}
+
+/* الحقول */
+
+input,
+textarea{
+  width:100%;
+  background:#0c1022;
+  border:1px solid #2b2b40;
+  color:white;
+  padding:16px;
+  border-radius:14px;
+  margin-bottom:18px;
+  font-size:16px;
+  transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+  outline:none;
+  border-color:#ff003c;
+  box-shadow:0 0 15px rgba(255,0,60,.4);
+}
+
+textarea{
+  min-height:140px;
+  resize:vertical;
+}
+
+input::placeholder,
+textarea::placeholder{
+  color:#777;
+}
+
+.row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:15px;
+}
+
+/* الزر */
+
+button{
+  width:100%;
+  padding:18px;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#ff003c,#ff1744);
+  color:white;
+  font-size:20px;
+  font-weight:bold;
+  cursor:pointer;
+  transition:.3s;
+  margin-bottom:20px;
+}
+
+button:hover{
+  transform:scale(1.02);
+  box-shadow:0 0 25px rgba(255,0,60,.5);
+}
+
+    .copy-btn{
+  margin-top:10px;
+  background:linear-gradient(90deg,#111,#2b2b2b);
+  border:1px solid #ff003c;
+}
+
+.copy-btn:hover{
+  background:#ff003c;
+}
+/* الفوتر */
+
+.footer{
+  text-align:center;
+  padding:30px 10px;
+  color:#999;
+  border-top:1px solid rgba(255,255,255,.1);
+  margin-top:30px;
+}
+
+.footer h3{
+  color:#ff003c;
+  margin-bottom:10px;
+  font-size:28px;
+}
+
+.footer p{
+  margin:5px 0;
+  line-height:1.8;
+}
+
+/* موبايل */
+
+@media(max-width:700px){
+
+  .row{
+    grid-template-columns:1fr;
+  }
+
+  .card{
+    padding:20px;
+  }
+
+  .card h2{
+    font-size:24px;
+  }
+
+  .logo-title{
+    font-size:30px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!-- اللوجو -->
+
+  <div class="logo-box">
+
+    <!-- ضع رابط اللوجو هنا -->
+    <img src="https://k.top4top.io/p_3783xyk9b1.png" alt="FAMILY IPTV Converter">
+
+    <div class="logo-title">
+      FAMILY IPTV Converter
+    </div>
+
+    <div class="logo-desc">
+      قم بتحويل بيانات IPTV إلى روابط M3U بسهولة وفوراً
+    </div>
+
+  </div>
+
+  <!-- تحويل -->
+
+  <div class="card">
+
+    <h2>تحويل البيانات إلى رابط M3U</h2>
+
+    <p>
+      قم بتحويل URL + Username + Password إلى رابط M3U جاهز
+    </p>
+
+    <input
+      type="text"
+      id="server"
+      placeholder="http://example.com:8080">
+
+    <div class="row">
+
+      <input
+        type="text"
+        id="username"
+        placeholder="Username">
+
+      <input
+        type="text"
+        id="password"
+        placeholder="Password">
+
+    </div>
+
+    <button onclick="generateM3U()">
+      إنشاء رابط M3U
+    </button>
+
+    <textarea
+      id="m3uResult"
+      readonly
+      placeholder="سيظهر رابط M3U هنا"></textarea>
+      <button class="copy-btn" onclick="copyM3U()">
+  نسخ رابط M3U
+</button>
+
+  </div>
+
+  <!-- تحليل -->
+
+  <div class="card">
+
+    <h2>تحويل رابط M3U</h2>
+
+    <p>
+      استخراج URL واسم المستخدم وكلمة المرور من رابط M3U
+    </p>
+
+    <input
+      type="text"
+      id="m3uLink"
+      placeholder="ضع رابط M3U هنا">
+
+    <button onclick="parseM3U()">
+      تحويل الآن
+    </button>
+
+    <textarea
+      id="parseResult"
+      readonly
+      placeholder="ستظهر النتائج هنا"></textarea>
+      <button class="copy-btn" onclick="copyParse()">
+  نسخ البيانات
+</button>
+
+  </div>
+
+  <!-- الحقوق -->
+
+<footer style="text-align:center; padding:15px; color:#fff; background:#111;">
+    جميع الحقوق محفوظة لـ 
+    <a href="https://familyiptv.net/" target="_blank" style="color:#ff003c; text-decoration:none;">
+        سيرفر فاملي 2026
+    </a>
+</footer>
+
+</div>
+
+<script>
+
+function generateM3U(){
+
+  let server =
+    document.getElementById("server").value.trim();
+
+  let username =
+    document.getElementById("username").value.trim();
+
+  let password =
+    document.getElementById("password").value.trim();
+
+  if(!server || !username || !password){
+
+    alert("يرجى تعبئة جميع الحقول");
+
+    return;
+  }
+
+  server = server.replace(/\/$/, '');
+
+  let m3u =
+`${server}/get.php?username=${encodeURIComponent(username)}&password=${encodeURIComponent(password)}&type=m3u_plus&output=ts`;
+
+  document.getElementById("m3uResult").value = m3u;
+}
+
+function parseM3U(){
+
+  let url =
+    document.getElementById("m3uLink").value.trim();
+
+  if(!url){
+
+    alert("يرجى إدخال رابط M3U");
+
+    return;
+  }
+
+  try{
+
+    let parsed = new URL(url);
+
+    let username =
+      parsed.searchParams.get("username");
+
+    let password =
+      parsed.searchParams.get("password");
+
+    let server =
+      parsed.protocol + "//" + parsed.host;
+
+    if(!username || !password){
+
+      document.getElementById("parseResult").value =
+        "الرابط غير صالح";
+
+      return;
+    }
+
+    let result =
+
+`URL:
+${server}
+
+Username:
+${username}
+
+Password:
+${password}`;
+
+    document.getElementById("parseResult").value =
+      result;
+
+  }catch(err){
+
+    document.getElementById("parseResult").value =
+      "حدث خطأ أثناء تحليل الرابط";
+
+  }
+
+}
+function copyM3U(){
+
+  let text =
+    document.getElementById("m3uResult").value;
+
+  if(!text){
+    alert("لا يوجد رابط للنسخ");
+    return;
+  }
+
+  navigator.clipboard.writeText(text);
+
+  alert("تم نسخ رابط M3U");
+}
+
+function copyParse(){
+
+  let text =
+    document.getElementById("parseResult").value;
+
+  if(!text){
+    alert("لا توجد بيانات للنسخ");
+    return;
+  }
+
+  navigator.clipboard.writeText(text);
+
+  alert("تم نسخ البيانات");
+}
+</script>
+
+</body>
+</html>
